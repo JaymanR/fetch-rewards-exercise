@@ -18,6 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+/**
+ * A screen that displays a list of items grouped and sorted by their list ID and then name.
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListScreen(
@@ -51,6 +54,9 @@ fun ListScreen(
     }
 }
 
+/**
+ * Composable that shows a single item.
+ */
 @Composable
 fun ListItem(
     name: String,

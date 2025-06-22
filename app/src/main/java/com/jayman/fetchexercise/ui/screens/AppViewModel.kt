@@ -17,6 +17,9 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "AppViewModel"
 
+/**
+ * ViewModel for the app.
+ */
 class AppViewModel(
     private val listDataRepository: ListDataRepository
 ) : ViewModel() {
@@ -29,6 +32,9 @@ class AppViewModel(
         getListData()
     }
 
+    /**
+     * Fetches the list data and sorts it.
+     */
     fun getListData() {
         viewModelScope.launch {
             val items = try {
