@@ -32,19 +32,22 @@ class AppViewModel(
     fun getListData() {
         viewModelScope.launch {
             val items = try {
-                val data = listDataRepository.getListData().filter { !it.name.isNullOrBlank() }
+                val data = listDataRepository
+                    .getListData()
+                    .filter { !it.name.isNullOrBlank() }
+                    .sortedWith(compareBy({ it.listId }, { it.name }))
                 Log.d(TAG, "received $data.size")
-                data
+                data.groupBy { it.listId }
             } catch (e: Exception) {
                 Log.e(TAG, "error: $e")
-                emptyList()
+                emptyMap()
             }
-            uiState = uiState.copy(listItems = items)
+            uiState = uiState.copy(items)
         }
     }
 
     data class UiState(
-        var listItems: List<Item> = emptyList(),
+        var groupedListItems: Map<Int, List<Item>> = emptyMap(),
     )
 
     companion object {
