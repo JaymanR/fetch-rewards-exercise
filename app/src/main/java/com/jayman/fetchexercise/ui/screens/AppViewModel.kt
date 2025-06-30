@@ -52,6 +52,16 @@ class AppViewModel(
         }
     }
 
+    fun deleteListItem(listId: Int, id: Int) {
+        val mutableMap = uiState.groupedListItems.toMutableMap()
+        val list = mutableMap[listId]?.toMutableList()
+        list?.removeIf { it.id == id }
+
+        if (list != null) { mutableMap[listId] = list }
+
+        uiState = uiState.copy(mutableMap)
+    }
+
     data class UiState(
         var groupedListItems: Map<Int, List<Item>> = emptyMap(),
     )

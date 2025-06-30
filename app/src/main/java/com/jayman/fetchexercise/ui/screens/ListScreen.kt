@@ -47,7 +47,8 @@ fun ListScreen(
             items(itemNames) { itemName ->
                 ListItem(
                     name = itemName.name,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
+                    onClick = { viewModel.deleteListItem(listId, itemName.id) }
                 )
             }
         }
@@ -60,12 +61,14 @@ fun ListScreen(
 @Composable
 fun ListItem(
     name: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(4.dp),
+        onClick = onClick,
     ) {
         Column(Modifier.padding(16.dp)) {
             Text(
